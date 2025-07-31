@@ -1,5 +1,5 @@
-# Use an official OpenJDK 17 runtime as a base image
-FROM openjdk:17-jdk-slim
+# --- CHANGE THIS LINE ---
+FROM openjdk:21-jdk-slim
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -8,7 +8,7 @@ WORKDIR /app
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 
-# --- FIX: Add execute permission to the Maven wrapper ---
+# Add execute permission to the Maven wrapper
 RUN chmod +x ./mvnw
 
 # Download dependencies (this step is cached if pom.xml doesn't change)
