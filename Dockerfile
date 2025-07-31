@@ -1,27 +1,34 @@
-# --- CHANGE THIS LINE ---
-FROM openjdk:21-jdk-slim
+# --- Stage 1: Build the application ---
+FROM openjdk:21-jdk-slim AS builder
 
-# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the Maven wrapper and pom.xml to leverage Docker caching
+# Copy the Maven wrapper and pom.xml
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 
-# Add execute permission to the Maven wrapper
+# Add execute permission
 RUN chmod +x ./mvnw
 
-# Download dependencies (this step is cached if pom.xml doesn't change)
+# Download dependencies
 RUN ./mvnw dependency:go-offline
 
-# Copy the rest of your application's source code
+# Copy the rest of the source code
 COPY src ./src
 
-# Package the application into a JAR file, skipping tests
+# Package the application
 RUN ./mvnw package -DskipTests
 
-# Tell Docker that the container listens on port 8080
+# --- Stage 2: Create the final, lightweight image ---
+FROM openjdk:21-jdk-slim
+
+WORKDIR /app
+
+# Copy only the built JAR file from the builder stage
+COPY --from=builder /app/target/bus-reservation-0.0.1-SNAPSHOT.jar app.jar
+
+# Expose the port
 EXPOSE 8080
 
-# The command to run when the container starts
-ENTRYPOINT ["java", "-jar", "target/bus_reservation-0.0.1-SNAPSHOT.jar"]
+# The command to run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]
