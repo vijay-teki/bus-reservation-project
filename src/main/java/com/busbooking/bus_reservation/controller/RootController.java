@@ -6,9 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RootController {
 
-
-    @GetMapping("/")
-    public String home() {
-        return "JetBus API is running!";
+@GetMapping("/health-check")
+   public ResponseEntity<String> health() {
+        return ResponseEntity.ok("OK");
     }
 }
