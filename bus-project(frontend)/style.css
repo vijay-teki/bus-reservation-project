@@ -1,0 +1,648 @@
+/* --- Core Design System (High-Contrast Glassmorphism) --- */
+:root {
+    --font-primary: 'Poppins', sans-serif;
+    --border-radius: 16px;
+    --transition-speed: 0.3s;
+    
+    /* Refined color palette for better visibility */
+    --color-text-primary: #f0f0f0; /* Slightly off-white for comfort */
+    --color-text-secondary: #b3b3b3; /* Darker grey for secondary text */
+    --color-primary: #7c3aed; /* A deeper, richer purple */
+    --color-primary-dark: #6d28d9;
+    --color-accent: #16a34a; /* Deeper green */
+    --color-accent-dark: #15803d;
+    --color-danger: #dc2626; /* Standard red for clarity */
+    --color-danger-dark: #b91c1c;
+    --color-warning: #d97706;
+    --color-warning-dark: #b45309;
+    --color-white: #ffffff;
+}
+
+/* --- General Body and Font Styles --- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-image: url('https://images.unsplash.com/photo-1614850523060-8da1d56ae167?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bGlnaHQlMjBjb2xvdXJ8ZW58MHx8MHx8fDA%3D');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--color-text-primary);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- Utility & Animation --- */
+.hidden {
+    display: none !important;
+}
+
+.full-width {
+    width: 100%;
+}
+
+@keyframes fadeInFromBottom {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Frosted Glass Effect (Darker for Contrast) --- */
+.glass-panel {
+    background: rgba(15, 15, 25, 0.65); /* Darker and more opaque panel background */
+    backdrop-filter: blur(12px) saturate(120%);
+    -webkit-backdrop-filter: blur(12px) saturate(120%);
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    animation: fadeInFromBottom 0.6s ease-out forwards;
+}
+
+/* --- Header --- */
+.header {
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 2rem;
+}
+/* Apply a more opaque glass effect to header */
+.header .header-content {
+    background: rgba(15, 15, 25, 0.75);
+    backdrop-filter: blur(15px);
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+/* --- Logo Styles --- */
+.app-title-link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    width: 66px; /* Set the width for the image */
+    height: 50px; /* Set the height for the image */
+    transition: transform var(--transition-speed) ease;
+}
+
+.app-title-link:hover .logo-icon {
+    transform: rotate(-5deg) scale(1.1);
+}
+
+.logo-text {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-white);
+    margin: 0;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+}
+
+.main-nav {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.nav-button {
+    background-color: transparent;
+    color: var(--color-text-secondary);
+    border: 1px solid transparent;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+}
+
+.nav-button:hover:not(.active) {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-white);
+}
+
+.nav-button.active {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.nav-button.logout-button {
+    background-color: var(--color-danger);
+    color: var(--color-white);
+}
+.nav-button.logout-button:hover {
+    background-color: var(--color-danger-dark);
+}
+
+/* --- Main Content & Sections --- */
+.main-content {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+.section {
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.section-title, .sub-section-title {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--color-text-primary);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.section-title { font-size: 2rem; }
+.sub-section-title { font-size: 1.5rem; margin-top: 2rem; }
+
+/* --- Forms (High-Contrast Inputs) --- */
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    font-size: 1rem;
+    font-family: var(--font-primary);
+    border-radius: 10px;
+    color: var(--color-text-primary);
+    transition: all var(--transition-speed) ease;
+    
+    background: rgba(0, 0, 0, 0.25); /* Darker input background */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.form-group input::placeholder {
+    color: var(--color-text-secondary);
+}
+
+.form-group input:focus, .form-group select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    background: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.5);
+}
+
+/* --- Buttons --- */
+.button {
+    border: none;
+    padding: 0.85rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    color: var(--color-white);
+}
+.button:hover:not(:disabled) {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+.button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.primary-button { background: linear-gradient(45deg, var(--color-primary), var(--color-primary-dark)); }
+.danger-button { background: linear-gradient(45deg, var(--color-danger), var(--color-danger-dark)); }
+.success-button { background: linear-gradient(45deg, var(--color-accent), var(--color-accent-dark)); }
+.warning-button { background: linear-gradient(45deg, var(--color-warning), var(--color-warning-dark)); }
+
+/* --- FIX: Added style for the "Cancel" button to make text visible --- */
+.secondary-button {
+    background: rgba(80, 80, 90, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.secondary-button:hover:not(:disabled) {
+    background: rgba(100, 100, 110, 0.9);
+}
+
+
+/* --- Cards (Buses, Reservations) --- */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.bus-card, .reservation-card {
+    padding: 1.5rem;
+    transition: all var(--transition-speed) ease;
+    display: flex;
+    flex-direction: column;
+    background-color:rgb(239, 237, 237);
+    border-radius: 5px;
+    
+    margin:15px;
+}
+.bus-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+}
+
+/* --- Dashboards --- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+@media (min-width: 992px) {
+    .dashboard-grid {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+/* --- Modals --- */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(10, 10, 10, 0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+.modal-content {
+    padding: 1.5rem;
+    max-width: 500px;
+    width: 100%;
+    color: black;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+}
+.modal-content.large-modal { max-width: 700px; }
+.modal-title { margin-bottom: 1.5rem; text-align: center; }
+.modal-close-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none; border: none; font-size: 2.5rem;
+    color: var(--color-text-secondary); cursor: pointer;
+    line-height: 1; transition: all var(--transition-speed) ease;
+}
+.modal-close-button:hover { color: var(--color-white); transform: rotate(90deg); }
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#confirm-modal, #message-modal {
+    z-index: 1001;
+}
+
+/* --- Seat Selection (New 2+2 Layout) --- */
+.seat-grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr) 0.5fr repeat(2, 1fr);
+    gap: 10px 6px;
+    padding: 1rem;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.2);
+    max-height: 400px;
+    overflow-y: auto;
+    
+    /* --- FIX: Added max-width to make the entire seat grid smaller --- */
+    max-width: 300px;
+    margin: 0 auto; /* Center the smaller grid */
+}
+
+.seat-button {
+    position: relative;
+    aspect-ratio: 1 / 1.2;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: var(--color-text-primary);
+    font-weight: 600;
+    
+    /* --- FIX: Reduced font size for the smaller seats --- */
+    font-size: 0.85rem;
+    transition: transform var(--transition-speed) ease;
+}
+
+.seat-button::before { /* Seat Back */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    width: 80%;
+    height: 35%;
+    border-radius: 6px 6px 2px 2px;
+    transition: background-color var(--transition-speed) ease;
+}
+
+.seat-button::after { /* Seat Base */
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60%;
+    border-radius: 8px;
+    transition: background-color var(--transition-speed) ease;
+}
+
+.seat-button span { /* Seat Number */
+    position: relative;
+    z-index: 1;
+}
+
+.seat-button:hover:not(:disabled) {
+    transform: scale(1.1);
+}
+
+/* Available Seat Colors */
+.seat-button.available::before,
+.seat-button.available::after {
+    background-color: rgba(34, 197, 94, 0.5);
+    border: 1px solid rgba(34, 197, 94, 0.8);
+}
+
+/* Booked Seat Colors */
+.seat-button.booked::before,
+.seat-button.booked::after {
+    background-color: rgba(239, 68, 68, 0.4);
+    border: 1px solid rgba(239, 68, 68, 0.6);
+}
+.seat-button.booked {
+    cursor: not-allowed;
+}
+
+/* Selected Seat Colors */
+.seat-button.selected::before,
+.seat-button.selected::after {
+    background-color: var(--color-primary);
+    border: 1px solid var(--color-primary-dark);
+}
+.seat-button.selected {
+    transform: scale(1.1);
+}
+
+/* --- Auth Page Specifics --- */
+.auth-section {
+    max-width: 450px;
+    margin: 2rem auto;
+}
+
+/* --- Login Page Enhancements for Visibility --- */
+#auth-section {
+    /* Add a more prominent border and a subtle glow to the login panel */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), 0 0 25px rgba(124, 58, 237, 0.25);
+    border-radius: 25px;
+}
+
+/* Make the main title and form labels pure white and bolder */
+#auth-section #auth-title,
+#auth-section .form-group label {
+    color: #030303;
+    font-weight: 700;
+}
+
+/* Make the text inside the input fields brighter */
+#auth-section .form-group input {
+    color: #ffffff;
+}
+
+/* Make the placeholder text in the login form brighter */
+#auth-section .form-group input::placeholder {
+    color: rgba(255, 255, 255, 0.75);
+}
+#auth-section .button  {
+    margin-top: 15px;
+}
+.auth-toggle-buttons {
+    display: flex;
+    border-radius: 50px;
+    background: rgba(247, 247, 247, 0.995);
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+.toggle-button {
+    flex: 1;
+    padding: 0.75rem 0;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    background: none;
+    color: black;
+    transition: all var(--transition-speed) ease;
+}
+.toggle-button.active {
+    background: var(--color-primary);
+    color: white;
+    box-shadow: 0 0 10px rgba(124, 58, 237, 0.7);
+}
+
+/* --- Footer --- */
+.footer {
+    text-align: center;
+    padding: 1.5rem 0;
+    margin-top: 2rem;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+/* --- User Dashboard Enhancements for Visibility --- */
+#user-dashboard-section {
+    /* Add a more prominent border and a subtle green glow for the user area */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), 0 0 25px rgba(22, 163, 74, 0.25); /* Green accent glow */
+    border-radius: 20px;
+}
+
+/* Make all titles and form labels pure white and bolder */
+#user-dashboard-section .section-title,
+#user-dashboard-section .sub-section-title,
+#user-dashboard-section .form-group label {
+    color: #080707;
+    font-weight: 700;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color:whitesmoke;
+    border-radius: 25px;
+   
+}
+
+/* Make the text inside the bus and reservation cards brighter */
+#user-dashboard-section .bus-card p,
+#user-dashboard-section .reservation-card p,
+#user-dashboard-section .bus-card h4,
+#user-dashboard-section .reservation-card h4 {
+    color: #060505;
+    
+}
+
+/* Make the placeholder text in the search form brighter */
+#user-dashboard-section .form-group input::placeholder {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+#user-dashboard-section  .search-form .button{
+ margin-top: 10px;
+}
+
+/* --- Admin Panel Enhancements for Visibility --- */
+#admin-dashboard-section {
+    /* Add a more prominent border and a subtle yellow glow for the admin area */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), 0 0 25px rgba(217, 119, 6, 0.3); /* Yellow/Warning accent glow */
+    border-radius: 20px;
+}
+
+/* Make all titles and form labels dark with a light background */
+#admin-dashboard-section .section-title,
+#admin-dashboard-section .sub-section-title,
+#admin-dashboard-section .form-group label {
+    color: #080707;
+    font-weight: 700;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background-color: whitesmoke;
+    border-radius: 25px;
+    padding: 0.5rem 1rem;
+}
+
+/* Make the text inside the admin bus cards dark */
+#admin-dashboard-section .bus-card p,
+#admin-dashboard-section .bus-card h4 {
+    color: #060505;
+}
+
+#add-bus-form .form-group,
+#add-bus-form .form-group label,
+#add-bus-form .form-group input{
+    margin:10px;
+}
+
+
+#add-bus-form .form-group input::placeholder {
+    color: white;
+}
+
+#message-modal .modal-content{
+    background-color: whitesmoke;
+    border-radius: 10px;
+     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), 0 0 25px rgba(217, 119, 6, 0.3); /* Yellow/Warning accent glow */
+    color: black;
+    font-size: medium;
+}
+
+
+
+#edit-bus-modal .modal-content {
+    background-color: whitesmoke;
+    border-radius: 10px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3), 0 0 25px rgba(217, 119, 6, 0.3); /* Yellow/Warning accent glow */
+    color: black;
+    font-size: medium;
+}
+#edit-bus-modal .form-group input,
+#edit-bus-modal .form-group select ,
+#edit-bus-modal .form-group label {
+    color: black;
+}
+
+
+
+/* --- Demo Credentials Info Box Style --- */
+.demo-credentials {
+    margin-top: 2.5rem;
+    padding: 1rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius);
+    background: rgba(0, 0, 0, 0.2);
+    text-align: left;
+    transition: all var(--transition-speed) ease;
+}
+
+.demo-credentials h4 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: black;
+    font-weight: 600;
+    font-size: larger;
+}
+
+.demo-credentials p {
+    margin: 0.8rem 0;
+    color: white;
+    font-size: 1rem;
+}
+
+.demo-credentials p strong {
+    color: black;
+    min-width: 90px;
+    display: inline-block;
+    font-weight: 700;
+}
+
+.demo-credentials hr {
+    border: none;
+    height: 1px;
+    background-color: rgba(226, 226, 226, 0.2);
+    margin: 1rem 0;
+}
+/* --- Style for Disclaimer Text in Info Box --- */
+#demo-credentials-box .disclaimer-text {
+    color:black;
+    font-size: 1.00rem;
+    font-style: italic;
+    text-align: center;
+    opacity: 0.8;
+    margin-top: 1rem;
+    line-height: 1.5;
+}
+
+/* --- Password Preview Icon Styles --- */
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-toggle-icon {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: black;
+}
+
+.password-toggle-icon svg {
+    width: 22px;
+    height: 22px;
+}

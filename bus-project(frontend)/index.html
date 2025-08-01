@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JetBus - Fast & Easy Bus Booking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+           <a href="#" class="app-title-link">
+    <img src="bus-on-black-background-vector-22738707.jpg" alt="BusJet Logo" class="logo-icon">
+    <span class="logo-text">JetBus</span>
+</a>
+            <nav class="main-nav">
+                <button id="nav-auth" class="nav-button active">Login / Register</button>
+                <button id="nav-user-dashboard" class="nav-button hidden">Dashboard</button>
+                <button id="nav-admin-dashboard" class="nav-button hidden">Admin Panel</button>
+                <button id="nav-logout" class="nav-button logout-button hidden">Logout</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container main-content">
+        <section id="auth-section" class="section auth-section">
+            <div class="auth-toggle-buttons">
+                <button id="toggle-login" class="toggle-button active">Login</button>
+                <button id="toggle-register" class="toggle-button">Register</button>
+            </div>
+            <form id="auth-form" class="form">
+                 <h2 id="auth-title" class="section-title">Login to Your Account</h2>
+                <div id="name-field" class="form-group hidden">
+                    <label for="auth-name">Full Name</label>
+                    <input type="text" id="auth-name" name="name" required />
+                </div>
+                <div class="form-group">
+                    <label for="auth-email">Email Address</label>
+                    <input type="email" id="auth-email" name="email" required />
+                </div>
+               <div class="form-group">
+    <label for="auth-password">Password</label>
+    <div class="password-wrapper">
+        <input type="password" id="auth-password" name="password" required />
+        <span class="password-toggle-icon">
+            <svg class="eye-open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12,4.5C7,4.5,2.73,7.61,1,12c1.73,4.39,6,7.5,11,7.5s9.27-3.11,11-7.5C21.27,7.61,17,4.5,12,4.5zM12,17c-2.76,0-5-2.24-5-5s2.24-5,5-5,5,2.24,5,5S14.76,17,12,17zM12,9c-1.66,0-3,1.34-3,3s1.34,3,3,3,3-1.34,3-3S13.66,9,12,9z"></path></svg>
+            <svg class="eye-closed hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12,7c2.76,0,5,2.24,5,5c0,1.66-0.83,3.1-2.09,4.03l1.47,1.47C17.99,16.29,19,14.74,19,12c0-4.39-4.27-7.5-9-7.5 c-1.4,0-2.72,0.35-3.9,0.95l1.48,1.48C8.9,7.83,10.44,7,12,7zM2,4.27l3.11,3.11C3.23,8.44,2,10.1,2,12c0,4.39,4.27,7.5,9,7.5 c1.9,0,3.67-0.59,5.08-1.58l3.11,3.11l1.41-1.41L3.41,2.86L2,4.27zM7.53,9.8l1.55,1.55c-0.05,0.21-0.08,0.43-0.08,0.65 c0,1.66,1.34,3,3,3c0.22,0,0.44-0.03,0.65-0.08l1.55,1.55C13.1,16.17,12.06,16.5,11,16.5c-2.76,0-5-2.24-5-5 C6,11.06,6.33,10.1,6.88,9.27L7.53,9.8z"></path></svg>
+        </span>
+    </div>
+</div>
+                <div id="role-select-field" class="form-group">
+                    <label for="auth-role">Login as</label>
+                    <select id="auth-role" name="role">
+                        <option value="USER">User</option>
+                        <option value="ADMIN">Admin</option>
+                    </select>
+                </div>
+                <button type="submit" id="auth-submit-btn" class="button primary-button full-width">Login</button>
+            </form>
+
+           
+        </section>
+
+          <div id="demo-credentials-box" class="demo-credentials">
+        <h4>Demo Credentials</h4>
+        <p><strong>Role:</strong> User</p>
+        <p><strong>Email:</strong> user@gmail.com</p>
+        <p><strong>Password:</strong> user123</p>
+        <hr>
+        <p><strong>Role:</strong> Admin</p>
+        <p><strong>Email:</strong> admin@gmail.com</p>
+        <p><strong>Password:</strong> admin123</p>
+         <hr>
+        <p class="disclaimer-text">
+            This is a simple project for demo purpose. Advanced features like full authentication and authorization are not included.
+        </p>
+    </div>
+        <section id="user-dashboard-section" class="section hidden">
+            <h2 class="section-title">Welcome, <span id="user-name-display"></span>!</h2>
+            <div class="dashboard-grid">
+                <div class="dashboard-main">
+                    <section class="sub-section">
+                        <h3 class="sub-section-title">Search for a Bus</h3>
+                        <form id="search-bus-form" class="form search-form">
+                            <div class="form-group">
+                                <label for="search-source">From</label>
+                                <input type="text" id="search-source" name="source" required placeholder="e.g., Hyderabad" />
+                            </div>
+                            <div class="form-group">
+                                <label for="search-destination">To</label>
+                                <input type="text" id="search-destination" name="destination" required placeholder="e.g., Bengaluru" />
+                            </div>
+                            <button type="submit" class="button primary-button">Search Buses</button>
+                        </form>
+                        <div id="search-results" class="card-grid"></div>
+                    </section>
+                </div>
+                <aside class="dashboard-sidebar">
+                    <section class="sub-section">
+                        <h3 class="sub-section-title">My Reservations</h3>
+                        <div id="user-reservations-list"></div>
+                    </section>
+                </aside>
+            </div>
+        </section>
+
+        <section id="admin-dashboard-section" class="section hidden">
+            <h2 class="section-title">Admin Panel</h2>
+            <section class="sub-section">
+                <h3 class="sub-section-title">Add New Bus</h3>
+                <form id="add-bus-form" class="form add-bus-form">
+                    <div class="form-group">
+                        <label for="add-busNumber">Bus Number</label>
+                        <input type="text" id="add-busNumber" name="busNumber" required placeholder="e.g., AP28Z 1234"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="add-departureTime">Departure Time</label>
+                        <input type="text" id="add-departureTime" name="departureTime" placeholder="HH:MM (24-hr)" required />
+                    </div>
+                     <div class="form-group">
+                        <label for="add-source">Source</label>
+                        <input type="text" id="add-source" name="source" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="add-destination">Destination</label>
+                        <input type="text" id="add-destination" name="destination" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="add-totalSeats">Total Seats</label>
+                        <input type="number" id="add-totalSeats" name="totalSeats" min="1" value="50" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="add-price">Price (₹)</label>
+                        <input type="number" id="add-price" name="price" min="0" step="0.01" value="500.00" required />
+                    </div>
+                    <div class="form-group full-width">
+                        <button type="submit" class="button primary-button">Add Bus</button>
+                    </div>
+                </form>
+            </section>
+            <section class="sub-section">
+                <h3 class="sub-section-title">Manage All Buses</h3>
+                <div id="all-buses-list" class="card-grid"></div>
+            </section>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 JetBus. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <div id="message-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="message-modal-title" class="modal-title">Notification</h3>
+                <button id="message-modal-close" class="modal-close-button">&times;</button>
+            </div>
+            <div id="message-modal-content" class="modal-body"></div>
+            <div class="modal-footer">
+                <button id="message-modal-ok" class="button primary-button">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="confirm-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="confirm-modal-title" class="modal-title">Confirm Action</h3>
+                <button id="confirm-modal-close" class="modal-close-button">&times;</button>
+            </div>
+            <div id="confirm-modal-content" class="modal-body"></div>
+            <div class="modal-footer">
+                <button id="confirm-modal-cancel" class="button secondary-button">Cancel</button>
+                <button id="confirm-modal-ok" class="button danger-button">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="seat-selection-modal" class="modal-overlay hidden">
+        <div class="modal-content large-modal">
+            <div class="modal-header">
+                <h3 id="seat-modal-title" class="modal-title">Select Your Seat</h3>
+                <button id="seat-modal-close" class="modal-close-button">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="seat-modal-details">
+                    <p id="seat-modal-price-display" class="seat-modal-price"></p>
+                    <p id="selected-seat-display" class="selected-seat-display">Selected Seat: <strong>None</strong></p>
+                </div>
+                <div id="seat-map-container" class="seat-grid-container"></div>
+            </div>
+            <div class="modal-footer">
+                <button id="seat-modal-cancel-btn" class="button secondary-button">Cancel</button>
+                <button id="seat-modal-book-btn" class="button primary-button" disabled>Book Seat</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="edit-bus-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Edit Bus Details</h3>
+                <button id="edit-bus-modal-close" class="modal-close-button">&times;</button>
+            </div>
+            <form id="edit-bus-form" class="form">
+                <div class="modal-body">
+                    <input type="hidden" id="edit-bus-id">
+                    <div class="form-group">
+                        <label for="edit-busNumber">Bus Number</label>
+                        <input type="text" id="edit-busNumber" name="busNumber" required />
+                    </div>
+                     <div class="form-group">
+                        <label for="edit-departureTime">Departure Time (HH:MM)</label>
+                        <input type="text" id="edit-departureTime" name="departureTime" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-source">Source</label>
+                        <input type="text" id="edit-source" name="source" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-destination">Destination</label>
+                        <input type="text" id="edit-destination" name="destination" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-totalSeats">Total Seats</label>
+                        <input type="number" id="edit-totalSeats" name="totalSeats" min="1" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-price">Price (₹)</label>
+                        <input type="number" id="edit-price" name="price" min="0" step="0.01" required />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="edit-bus-form-cancel" class="button secondary-button">Cancel</button>
+                    <button type="submit" class="button primary-button">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
