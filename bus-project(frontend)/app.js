@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
             sections.user.classList.remove('hidden');
             userNameDisplay.textContent = currentUser.name;
             fetchUserReservations();
-            searchResultsDiv.innerHTML = '<p>Search for a bus to see available routes.</p>';
+            searchResultsDiv.innerHTML = '<p style="color:black;">Search for a bus to see available routes.</p>';
         } else if (currentUser.role === 'ADMIN') {
             navButtons.admin.classList.remove('hidden');
             currentPage = 'admin';
@@ -648,4 +648,5 @@ document.addEventListener('click', function(e) {
         eyeOpen.classList.remove('hidden');
         eyeClosed.classList.add('hidden');
     }
+
 });
