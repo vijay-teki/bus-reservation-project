@@ -89,7 +89,7 @@ body {
 }
 /* Apply a more opaque glass effect to header */
 .header .header-content {
-    background: rgba(15, 15, 25, 0.75);
+    background: none;
     backdrop-filter: blur(15px);
     border-radius: 50px;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -117,7 +117,7 @@ body {
 .logo-text {
     font-size: 1.75rem;
     font-weight: 700;
-    color: var(--color-white);
+    color:black;
     margin: 0;
     text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
 }
@@ -645,4 +645,5 @@ body {
 .password-toggle-icon svg {
     width: 22px;
     height: 22px;
+
 }
